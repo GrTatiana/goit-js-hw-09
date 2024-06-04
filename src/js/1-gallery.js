@@ -70,24 +70,27 @@ const images = [
 
 const gallery = document.querySelector('.gallery');
 
-function createGallery(array) {
-  return array
-    .map(
-      ({ preview, original, description }) => `
-<li class="gallery-item">
-	<a class="gallery-link" href="${original}">
-		<img 
-			class="gallery-image" 
-			src="${preview}" 
-			alt="${description}" 
-			/>
-	</a>
+function imageTemplate(image) {
+  return `<li class="gallery-item">
+  <a class="gallery-link" href="${image.original}">
+    <img
+      width=360;
+      height=200;
+      class="gallery-image"
+      src="${image.preview}"
+      alt="${image.description} "
+    />
+  </a>
 </li>
-  `
-    )
-    .join('');
+`;
 }
-gallery.insertAdjacentHTML('beforeend', createGallery(images));
+
+function imagesTemplate(images) {
+  return images.map(imageTemplate).join('');
+}
+
+const marcup = imagesTemplate(images);
+gallery.innerHTML = marcup;
 
 const lightbox = new SimpleLightbox('.gallery a', {
   captionsData: 'alt',
