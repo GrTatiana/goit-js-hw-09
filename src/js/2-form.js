@@ -31,7 +31,6 @@ feedbackForm.addEventListener('input', () => {
 
 window.addEventListener('DOMContentLoaded', () => {
   const Data = loadFromLS('feedback-form-state');
-  console.log(Data);
   feedbackForm.elements.email.value = Data?.email ?? '';
   feedbackForm.elements.message.value = Data?.message ?? '';
 });
@@ -39,11 +38,10 @@ window.addEventListener('DOMContentLoaded', () => {
 feedbackForm.addEventListener('submit', event => {
   event.preventDefault();
   if (formData.email === '' || formData.message === '') {
-    alert('Fill please all fields');
-    return;
+    return alert('Fill please all fields');
   } else {
     feedbackForm.reset();
-    localStorage.removeItem('feedback-form-state');
-    form.reset();
+    localStorage.clear();
+    console.log(formData.email, formData.message);
   }
 });
