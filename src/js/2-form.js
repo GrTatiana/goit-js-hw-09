@@ -1,3 +1,4 @@
+const KEY_STORAGE = 'feedback-form-state';
 const formData = {
   email: '',
   message: '',
@@ -26,11 +27,11 @@ feedbackForm.addEventListener('input', () => {
   const message = dataForm.get('message');
   formData.email = email;
   formData.message = message;
-  saveToLS('feedback-form-state', formData);
+  saveToLS(KEY_STORAGE, formData);
 });
 
 window.addEventListener('DOMContentLoaded', () => {
-  const Data = loadFromLS('feedback-form-state');
+  const Data = loadFromLS(KEY_STORAGE);
   feedbackForm.elements.email.value = Data?.email ?? '';
   feedbackForm.elements.message.value = Data?.message ?? '';
 });
@@ -41,7 +42,7 @@ feedbackForm.addEventListener('submit', event => {
     return alert('Fill please all fields');
   } else {
     feedbackForm.reset();
-    localStorage.clear();
-    console.log(formData.email, formData.message);
+    localStorage.removeItem(KEY_STORAGE);
+    console.log(formData);
   }
 });
